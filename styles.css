@@ -1,0 +1,123 @@
+/* =========================================================
+   RESET GERAL
+   ========================================================= */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: "Outfit", sans-serif;
+}
+
+/* =========================================================
+   CORPO DA PÁGINA
+   ========================================================= */
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; /* ocupa a tela toda para centralizar na vertical */
+}
+
+/* =========================================================
+   LISTA DOS BOTÕES
+   ========================================================= */
+ul {
+  list-style: none;
+  display: flex;
+  position: relative;
+  gap: 40px; /* espaço entre os botões */
+}
+
+/* =========================================================
+   BOTÃO (cada <li>)
+   ========================================================= */
+ul li {
+  width: 80px; /* tamanho normal (círculo) */
+  height: 80px;
+  background: #ffffff;
+  box-shadow: 0 8px 25px #0000005b;
+  border-radius: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: 0.2s;
+}
+
+/* Botão aberto: largura que ele ganha ao passar o mouse */
+ul li:hover,
+ul li:focus-within {
+  width: 180px;
+}
+
+/* =========================================================
+   LINK (<a>) - cobre o botão inteiro para o clique funcionar
+   em qualquer parte dele. Fica por cima de tudo (z-index: 2).
+   ========================================================= */
+ul li a {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: 60px;
+}
+
+/* =========================================================
+   ÍCONE E TEXTO (ficam um em cima do outro, centralizados)
+   ========================================================= */
+ul li span {
+  position: absolute;
+  z-index: 1; /* acima do degradê (::before) */
+}
+
+/* ÍCONE  */
+ul li .icon {
+  color: var(--cor1);
+  font-size: 32px; 
+  transition: 0.2s;
+}
+
+/* TEXTO (nome da rede) - começa escondido (scale 0) */
+ul li .text {
+  color: #ffffff; /* branco para ler bem em cima do degradê */
+  font-size: 18px;
+  font-weight: 500;
+  white-space: nowrap; /* impede o nome de quebrar linha */
+  transform: scale(0);
+  transition: 0.2s;
+  transition-delay: 0.1s;
+}
+
+/* =========================================================
+   ESTADO ABERTO (hover ou foco pelo teclado)
+   ========================================================= */
+/* mostra o texto */
+ul li:hover .text,
+ul li:focus-within .text {
+  transform: scale(1);
+}
+
+/* esconde o ícone */
+ul li:hover .icon,
+ul li:focus-within .icon {
+  transform: scale(0);
+}
+
+/* =========================================================
+   DEGRADÊ DE FUNDO
+   ========================================================= */
+ul li::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 60px;
+  background-image: linear-gradient(45deg, var(--cor1), var(--cor2));
+  opacity: 0; /* escondido por padrão */
+  transition: 0.2s;
+}
+
+/* mostra o degradê ao abrir o botão */
+ul li:hover::before,
+ul li:focus-within::before {
+  opacity: 1;
+}
